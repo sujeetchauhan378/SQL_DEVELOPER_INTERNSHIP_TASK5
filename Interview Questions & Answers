@@ -1,0 +1,62 @@
+SQL Joins – Interview Questions & Answers
+
+1. Difference between INNER and LEFT JOIN?
+
+INNER JOIN: Returns only rows where there’s a match in both tables.
+LEFT JOIN: Returns all rows from the left table, plus matching rows from the right table (NULL if no match).
+
+2. What is a FULL OUTER JOIN?
+
+Combines results of LEFT and RIGHT joins.
+Returns all rows from both tables, with NULLs in unmatched columns.
+MySQL/SQLite require a workaround using UNION of LEFT and RIGHT joins.
+
+3. Can joins be nested?
+
+Yes. You can chain multiple joins:
+SELECT ...
+FROM A
+INNER JOIN B ON ...
+LEFT JOIN C ON ...
+
+4. How to join more than 2 tables?
+
+Chain multiple JOIN clauses:
+SELECT ...
+FROM orders o
+JOIN customers c ON c.customer_id = o.customer_id
+JOIN payments p  ON p.order_id = o.order_id;
+
+5. What is a cross join?
+
+Returns the Cartesian product of two tables (every row of table A with every row of table B).
+Usually used with caution due to large output.
+
+6. What is a natural join?
+
+Automatically joins tables on all columns with the same name.
+Shorter syntax but risky — unintended matches can occur if schema changes.
+
+7. Can you join tables without a foreign key?
+
+Yes. Foreign keys are for referential integrity.
+You can join any two tables using matching columns or conditions.
+
+8. What is a self-join?
+
+A join where a table is joined to itself using aliases.
+Useful for hierarchical data (e.g., employees & managers).
+
+9. What causes a Cartesian product?
+
+Using CROSS JOIN intentionally.
+Accidentally missing or miswriting the join condition in an INNER/LEFT/RIGHT join.
+
+10. How to optimize joins?
+
+Index join columns (PK/FK).
+Use selective filtering (WHERE) before joining large tables.
+Avoid functions on join keys (prevents index usage).
+Check execution plan with EXPLAIN.
+Use proper data types for matching columns.
+
